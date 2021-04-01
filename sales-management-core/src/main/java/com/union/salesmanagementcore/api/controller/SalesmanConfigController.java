@@ -31,7 +31,7 @@ public class SalesmanConfigController {
     @Autowired
     private SalesmanConfigService salesmanConfigService;
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "${v1.salesmanconfig.create}")
     @ApiResponses({
