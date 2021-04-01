@@ -43,6 +43,16 @@ public class SalesmanConfigController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{code}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Successful request with body content", response = SalesmanConfigResponseDto.class),
+    })
+    @ApiOperation(value = "${v1.salesmanConfig.findByCode}")
+    public SalesmanConfigResponseDto findByCode(@ApiParam(value = "${v1.salesmanConfig.code}", required = true) @PathVariable("code") String code) {
+        return salesmanConfigService.find(code);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "${v1.salesmanconfig.update}")
     @ApiResponses({
@@ -51,15 +61,5 @@ public class SalesmanConfigController {
     public SalesmanConfigResponseDto update(
             @ApiParam(value = "${v1.salesmanConfig}", required = true) @RequestBody SalesmanConfigUpdateDto salesmanConfigUpdateDto) {
         return salesmanConfigService.update(salesmanConfigUpdateDto);
-    }
-
-    @GetMapping(value = "/{code}")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Successful request with body content", response = SalesmanConfigResponseDto.class),
-    })
-    @ApiOperation(value = "${v1.salesmanConfig.findByCode}")
-    public SalesmanConfigResponseDto findByCode(@ApiParam(value = "${v1.salesmanConfig.code}", required = true) @PathVariable("code") String code) {
-        return salesmanConfigService.find(code);
     }
 }

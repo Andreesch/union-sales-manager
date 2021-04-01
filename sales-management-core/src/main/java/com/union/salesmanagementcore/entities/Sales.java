@@ -26,9 +26,10 @@ public class Sales {
     @Column(name = "DESCRIPTION", length = 255, nullable = false)
     private String description;
 
-    @Column(name = "value", nullable = false)
+    @Column(name = "VALUE", nullable = false)
     private Double value;
 
+    @Column(name = "CREATED_AT", nullable = false)
     private LocalDate createdAt;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
