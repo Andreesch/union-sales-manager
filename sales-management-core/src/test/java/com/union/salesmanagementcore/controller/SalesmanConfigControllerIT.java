@@ -1,5 +1,6 @@
 package com.union.salesmanagementcore.controller;
 
+import static com.union.salesmanagementcore.helpers.SalesmanConfigHelper.createAndReturnDefaultDto;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,6 +14,7 @@ import com.union.salesmanagementcore.api.dto.SalesmanConfigCreateDto;
 import com.union.salesmanagementcore.api.dto.SalesmanConfigResponseDto;
 import com.union.salesmanagementcore.api.dto.SalesmanConfigUpdateDto;
 import com.union.salesmanagementcore.entities.CommissionType;
+import com.union.salesmanagementcore.helpers.SalesmanConfigHelper;
 
 public class SalesmanConfigControllerIT extends AbstractTestController {
 
@@ -23,16 +25,9 @@ public class SalesmanConfigControllerIT extends AbstractTestController {
 
     @Test
     public void create() throws Exception {
-        SalesmanConfigCreateDto salesmanConfigCreateDto = createDto(CommissionType.VALUE, 100d);
+        SalesmanConfigCreateDto salesmanConfigCreateDto = SalesmanConfigHelper.createDto(CommissionType.VALUE, 100d);
 
-        SalesmanConfigResponseDto salesmanConfigResponseDto = given()
-                .header("Content-Type", "application/json")
-                .body(salesmanConfigCreateDto)
-                .post(SALESMAN_CONFIG_RESOURCE)
-                .then()
-                .statusCode(201)
-                .extract()
-                .as(SalesmanConfigResponseDto.class);
+        SalesmanConfigResponseDto salesmanConfigResponseDto = createAndReturnDefaultDto(salesmanConfigCreateDto);
 
         assertNotNull(salesmanConfigResponseDto.getId());
         assertEquals(salesmanConfigResponseDto.getCommissionType(), salesmanConfigCreateDto.getCommissionType());
@@ -41,8 +36,8 @@ public class SalesmanConfigControllerIT extends AbstractTestController {
 
     @Test
     public void update() throws Exception {
-        SalesmanConfigCreateDto salesmanConfigCreateDto = createDto(CommissionType.VALUE, 100d);
-        SalesmanConfigResponseDto salesmanConfigResponseDto = createAndReturnDto(salesmanConfigCreateDto);
+        SalesmanConfigCreateDto salesmanConfigCreateDto = SalesmanConfigHelper.createDto(CommissionType.VALUE, 100d);
+        SalesmanConfigResponseDto salesmanConfigResponseDto = createAndReturnDefaultDto(salesmanConfigCreateDto);
 
         SalesmanConfigUpdateDto salesmanConfigUpdateDto = updateDto(salesmanConfigResponseDto.getId(), CommissionType.PERCENT, 10d);
 
@@ -63,8 +58,8 @@ public class SalesmanConfigControllerIT extends AbstractTestController {
     @Disabled
     @Test
     public void findSalesmanConfig() throws Exception {
-        SalesmanConfigCreateDto salesmanConfigCreateDto = createDto(CommissionType.VALUE, 100d);
-        SalesmanConfigResponseDto salesmanConfigResponseDto = createAndReturnDto(salesmanConfigCreateDto);
+        SalesmanConfigCreateDto salesmanConfigCreateDto = SalesmanConfigHelper.createDto(CommissionType.VALUE, 100d);
+        SalesmanConfigResponseDto salesmanConfigResponseDto = createAndReturnDefaultDto(salesmanConfigCreateDto);
 
         SalesmanConfigResponseDto salesmanConfigFounded = given()
                 .urlEncodingEnabled(false)
@@ -81,27 +76,10 @@ public class SalesmanConfigControllerIT extends AbstractTestController {
         assertEquals(salesmanConfigResponseDto.getCommissionType(), salesmanConfigFounded.getCommissionType());
     }
 
-    private SalesmanConfigCreateDto createDto(CommissionType commissionType, Double value) {
-        return new SalesmanConfigCreateDto()
-                .setCommissionType(commissionType)
-                .setValue(value);
-    }
-
     private SalesmanConfigUpdateDto updateDto(String id, CommissionType commissionType, Double value) {
         return new SalesmanConfigUpdateDto()
                 .setId(id)
                 .setCommissionType(commissionType)
                 .setValue(value);
-    }
-
-    private SalesmanConfigResponseDto createAndReturnDto(SalesmanConfigCreateDto salesmanConfigCreateDto) {
-        return given()
-                .header("Content-Type", "application/json")
-                .body(salesmanConfigCreateDto)
-                .post(SALESMAN_CONFIG_RESOURCE)
-                .then()
-                .statusCode(201)
-                .extract()
-                .as(SalesmanConfigResponseDto.class);
     }
 }

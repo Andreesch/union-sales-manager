@@ -26,7 +26,7 @@ public class SalesmanService {
         Salesman salesman = SalesmanMapper.toEntity(salesmanCreateDto)
                 .setSalesmanConfig(salesmanConfig);
 
-        return SalesmanMapper.toResponseDto(salesman);
+        return SalesmanMapper.toResponseDto(salesmanRepository.save(salesman));
     }
 
     public SalesmanResponseDto update(SalesmanUpdateDto salesmanUpdateDto) {
@@ -41,7 +41,7 @@ public class SalesmanService {
 
     }
 
-    private Salesman findById(String id) {
+    public Salesman findById(String id) {
         return salesmanRepository.findById(id)
                 .orElseThrow();
     }

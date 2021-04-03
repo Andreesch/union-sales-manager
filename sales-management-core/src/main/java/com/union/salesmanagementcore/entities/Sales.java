@@ -1,6 +1,7 @@
 package com.union.salesmanagementcore.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class Sales {
     private Double value;
 
     @Column(name = "CREATED_AT", nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
@@ -63,12 +64,21 @@ public class Sales {
         return this;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Sales setCreatedAt(LocalDate createdAt) {
+    public Sales setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+        return this;
+    }
+
+    public Salesman getSalesman() {
+        return salesman;
+    }
+
+    public Sales setSalesman(Salesman salesman) {
+        this.salesman = salesman;
         return this;
     }
 }

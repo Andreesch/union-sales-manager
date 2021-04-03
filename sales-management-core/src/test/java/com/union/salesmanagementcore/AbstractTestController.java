@@ -19,6 +19,7 @@ public abstract class AbstractTestController {
     public static String API_V1;
     public static String SALESMAN_RESOURCE;
     public static String SALESMAN_CONFIG_RESOURCE;
+    public static String SALES_RESOURCE;
 
     @LocalServerPort
     public int randomPort;
@@ -31,5 +32,6 @@ public abstract class AbstractTestController {
         API_V1 = RestPath.BASE_PATH;
         SALESMAN_RESOURCE = API_V1 + "/salesman";
         SALESMAN_CONFIG_RESOURCE= API_V1 + "/salesman-config";
+        SALES_RESOURCE = API_V1 + "/sales";
     }
 }
