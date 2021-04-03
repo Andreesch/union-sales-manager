@@ -3,15 +3,14 @@ package com.union.salesmanagementcore.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -26,8 +25,10 @@ public class Salesman {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
 
+    @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "REGION", nullable = false)
     private Region region;
 
     @OrderBy("createdAt ASC")
@@ -37,6 +38,9 @@ public class Salesman {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "SALESMAN_CONFIG_ID", referencedColumnName = "ID", nullable = false)
     private SalesmanConfig salesmanConfig;
+
+    @OneToMany(mappedBy = "salesman", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<Goal> goal;
 
     public String getId() {
         return id;
@@ -80,6 +84,15 @@ public class Salesman {
 
     public Salesman setSalesmanConfig(SalesmanConfig salesmanConfig) {
         this.salesmanConfig = salesmanConfig;
+        return this;
+    }
+
+    public List<Goal> getGoal() {
+        return goal;
+    }
+
+    public Salesman setGoal(List<Goal> goal) {
+        this.goal = goal;
         return this;
     }
 }

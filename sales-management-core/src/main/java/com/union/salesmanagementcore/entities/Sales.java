@@ -82,3 +82,4 @@ public class Sales {
         return this;
     }
 }
+
