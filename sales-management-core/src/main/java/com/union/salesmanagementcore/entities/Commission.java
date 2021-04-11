@@ -11,15 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "SALESMAN_CONFIG")
-public class SalesmanConfig {
+@Table(name = "COMMISSION")
+public class Commission {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -34,14 +33,14 @@ public class SalesmanConfig {
     private Double value;
 
     @OrderBy("id DESC")
-    @OneToMany(mappedBy = "salesmanConfig", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "commission", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Salesman> salesman;
 
     public String getId() {
         return id;
     }
 
-    public SalesmanConfig setId(String id) {
+    public Commission setId(String id) {
         this.id = id;
         return this;
     }
@@ -50,7 +49,7 @@ public class SalesmanConfig {
         return commissionType;
     }
 
-    public SalesmanConfig setCommissionType(CommissionType commissionType) {
+    public Commission setCommissionType(CommissionType commissionType) {
         this.commissionType = commissionType;
         return this;
     }
@@ -59,7 +58,7 @@ public class SalesmanConfig {
         return value;
     }
 
-    public SalesmanConfig setValue(Double value) {
+    public Commission setValue(Double value) {
         this.value = value;
         return this;
     }
@@ -68,7 +67,7 @@ public class SalesmanConfig {
         return salesman;
     }
 
-    public SalesmanConfig setSalesman(List<Salesman> salesman) {
+    public Commission setSalesman(List<Salesman> salesman) {
         this.salesman = salesman;
         return this;
     }

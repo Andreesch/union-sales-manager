@@ -12,16 +12,16 @@ import io.swagger.annotations.ApiModelProperty;
 public class SalesmanCreateDto {
 
     @NotBlank
-    @ApiModelProperty(value = "${salesman.create.name}")
+    @ApiModelProperty(value = "Nome do vendedor")
     private String name;
 
     @NotNull
-    @ApiModelProperty(value = "${salesman.create.region}")
+    @ApiModelProperty(value = "Região de atuação")
     private Region region;
 
     @NotNull
-    @ApiModelProperty(value = "${salesman.create.configId}")
-    private String salesmanConfigId;
+    @ApiModelProperty(value = "Identificador da comissão")
+    private String commissionId;
 
     public String getName() {
         return name;
@@ -41,12 +41,12 @@ public class SalesmanCreateDto {
         return this;
     }
 
-    public String getSalesmanConfigId() {
-        return salesmanConfigId;
+    public String getCommissionId() {
+        return commissionId;
     }
 
-    public SalesmanCreateDto setSalesmanConfigId(String salesmanConfigId) {
-        this.salesmanConfigId = salesmanConfigId;
+    public SalesmanCreateDto setCommissionId(String commissionId) {
+        this.commissionId = commissionId;
         return this;
     }
 }

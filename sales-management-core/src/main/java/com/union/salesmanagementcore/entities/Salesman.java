@@ -36,11 +36,14 @@ public class Salesman {
     private List<Sales> sales;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "SALESMAN_CONFIG_ID", referencedColumnName = "ID", nullable = false)
-    private SalesmanConfig salesmanConfig;
+    @JoinColumn(name = "COMMISSION_ID", referencedColumnName = "ID", nullable = false)
+    private Commission commission;
 
     @OneToMany(mappedBy = "salesman", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private List<Goal> goal;
+    private List<Quota> quotas;
+
+    @OneToMany(mappedBy = "salesman", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    private List<Payment> payments;
 
     public String getId() {
         return id;
@@ -78,21 +81,30 @@ public class Salesman {
         return this;
     }
 
-    public SalesmanConfig getSalesmanConfig() {
-        return salesmanConfig;
+    public Commission getCommission() {
+        return commission;
     }
 
-    public Salesman setSalesmanConfig(SalesmanConfig salesmanConfig) {
-        this.salesmanConfig = salesmanConfig;
+    public Salesman setCommission(Commission commission) {
+        this.commission = commission;
         return this;
     }
 
-    public List<Goal> getGoal() {
-        return goal;
+    public List<Quota> getQuotas() {
+        return quotas;
     }
 
-    public Salesman setGoal(List<Goal> goal) {
-        this.goal = goal;
+    public Salesman setQuotas(List<Quota> quotas) {
+        this.quotas = quotas;
+        return this;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public Salesman setPayments(List<Payment> payments) {
+        this.payments = payments;
         return this;
     }
 }

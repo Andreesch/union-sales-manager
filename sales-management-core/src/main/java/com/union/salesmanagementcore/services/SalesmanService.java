@@ -7,8 +7,8 @@ import com.union.salesmanagementcore.api.dto.SalesmanCreateDto;
 import com.union.salesmanagementcore.api.dto.SalesmanResponseDto;
 import com.union.salesmanagementcore.api.dto.SalesmanUpdateDto;
 import com.union.salesmanagementcore.api.mapper.SalesmanMapper;
+import com.union.salesmanagementcore.entities.Commission;
 import com.union.salesmanagementcore.entities.Salesman;
-import com.union.salesmanagementcore.entities.SalesmanConfig;
 import com.union.salesmanagementcore.repository.SalesmanRepository;
 
 @Service
@@ -18,13 +18,13 @@ public class SalesmanService {
     private SalesmanRepository salesmanRepository;
 
     @Autowired
-    private SalesmanConfigService salesmanConfigService;
+    private CommissionService salesmanConfigService;
 
     public SalesmanResponseDto create(SalesmanCreateDto salesmanCreateDto) {
-        SalesmanConfig salesmanConfig = salesmanConfigService.findById(salesmanCreateDto.getSalesmanConfigId());
+        Commission commission = salesmanConfigService.findById(salesmanCreateDto.getCommissionId());
 
         Salesman salesman = SalesmanMapper.toEntity(salesmanCreateDto)
-                .setSalesmanConfig(salesmanConfig);
+                .setCommission(commission);
 
         return SalesmanMapper.toResponseDto(salesmanRepository.save(salesman));
     }
@@ -32,10 +32,10 @@ public class SalesmanService {
     public SalesmanResponseDto update(SalesmanUpdateDto salesmanUpdateDto) {
         findById(salesmanUpdateDto.getSalesmanId());
 
-        SalesmanConfig salesmanConfig = salesmanConfigService.findById(salesmanUpdateDto.getSalesmanConfigId());
+        Commission commission = salesmanConfigService.findById(salesmanUpdateDto.getSalesmanConfigId());
 
         Salesman updatedSalesman = SalesmanMapper.toEntity(salesmanUpdateDto)
-                .setSalesmanConfig(salesmanConfig);
+                .setCommission(commission);
 
         return SalesmanMapper.toResponseDto(salesmanRepository.save(updatedSalesman));
 

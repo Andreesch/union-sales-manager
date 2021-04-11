@@ -1,13 +1,14 @@
 package com.union.salesmanagementcore.api.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import com.union.salesmanagementcore.entities.CommissionType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("SalesmanConfigCreate")
-public class SalesmanConfigCreateDto {
+@ApiModel("CommissionCreateDto")
+public class CommissionCreateDto {
 
     @NotNull
     @ApiModelProperty(value = "${salesmanConfig.create.commissionType}")
@@ -17,11 +18,15 @@ public class SalesmanConfigCreateDto {
     @ApiModelProperty(value = "${salesmanConfig.create.value}")
     private Double value;
 
+    @NotBlank
+    @ApiModelProperty(value = "identificador do período")
+    private String quarterId;
+
     public CommissionType getCommissionType() {
         return commissionType;
     }
 
-    public SalesmanConfigCreateDto setCommissionType(CommissionType commissionType) {
+    public CommissionCreateDto setCommissionType(CommissionType commissionType) {
         this.commissionType = commissionType;
         return this;
     }
@@ -30,8 +35,17 @@ public class SalesmanConfigCreateDto {
         return value;
     }
 
-    public SalesmanConfigCreateDto setValue(Double value) {
+    public CommissionCreateDto setValue(Double value) {
         this.value = value;
+        return this;
+    }
+
+    public String getQuarterId() {
+        return quarterId;
+    }
+
+    public CommissionCreateDto setQuarterId(String quarterId) {
+        this.quarterId = quarterId;
         return this;
     }
 }

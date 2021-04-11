@@ -1,10 +1,9 @@
 package com.union.salesmanagementcore.helpers;
 
-import static com.union.salesmanagementcore.AbstractTestController.SALESMAN_CONFIG_RESOURCE;
 import static com.union.salesmanagementcore.AbstractTestController.SALESMAN_RESOURCE;
 import static io.restassured.RestAssured.given;
 
-import com.union.salesmanagementcore.api.dto.SalesmanConfigResponseDto;
+import com.union.salesmanagementcore.api.dto.ComissionResponseDto;
 import com.union.salesmanagementcore.api.dto.SalesmanCreateDto;
 import com.union.salesmanagementcore.api.dto.SalesmanResponseDto;
 import com.union.salesmanagementcore.entities.Region;
@@ -18,13 +17,13 @@ public class SalesmanHelper {
         return new SalesmanCreateDto()
                 .setName(name)
                 .setRegion(region)
-                .setSalesmanConfigId(salesmanConfigId);
+                .setCommissionId(salesmanConfigId);
     }
 
     public static SalesmanResponseDto createDefault() {
-        SalesmanConfigResponseDto salesmanConfigResponseDto = SalesmanConfigHelper.createAndReturnDefaultDto();
+        ComissionResponseDto comissionResponseDto = SalesmanConfigHelper.createAndReturnDefaultDto();
 
-        return createDefault(salesmanConfigResponseDto.getId());
+        return createDefault(comissionResponseDto.getId());
     }
 
     private static SalesmanResponseDto createDefault(String configId) {

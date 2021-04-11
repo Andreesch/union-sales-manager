@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.union.salesmanagementcore.api.dto.SalesmanConfigCreateDto;
-import com.union.salesmanagementcore.api.dto.SalesmanConfigResponseDto;
-import com.union.salesmanagementcore.api.dto.SalesmanConfigUpdateDto;
-import com.union.salesmanagementcore.services.SalesmanConfigService;
+import com.union.salesmanagementcore.api.dto.CommissionCreateDto;
+import com.union.salesmanagementcore.api.dto.ComissionResponseDto;
+import com.union.salesmanagementcore.api.dto.CommissionUpdateDto;
+import com.union.salesmanagementcore.services.CommissionService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,40 +26,40 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Comissão")
 @RestController("SalesmanConfigController")
 @RequestMapping(path = RestPath.BASE_PATH + "/salesman-config")
-public class SalesmanConfigController {
+public class CommissionController {
 
     @Autowired
-    private SalesmanConfigService salesmanConfigService;
+    private CommissionService comissionService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "${v1.salesmanconfig.create}")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Successful request with body content", response = SalesmanConfigResponseDto.class),
+            @ApiResponse(code = 201, message = "Successful request with body content", response = ComissionResponseDto.class),
     })
-    public SalesmanConfigResponseDto create(
-            @ApiParam(value = "${v1.salesmanConfig}", required = true) @RequestBody SalesmanConfigCreateDto salesmanConfigCreateDto) {
-        return salesmanConfigService.create(salesmanConfigCreateDto);
+    public ComissionResponseDto create(
+            @ApiParam(value = "${v1.salesmanConfig}", required = true) @RequestBody CommissionCreateDto commissionCreateDto) {
+        return comissionService.create(commissionCreateDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{code}")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Successful request with body content", response = SalesmanConfigResponseDto.class),
+            @ApiResponse(code = 200, message = "Successful request with body content", response = ComissionResponseDto.class),
     })
     @ApiOperation(value = "${v1.salesmanConfig.findByCode}")
-    public SalesmanConfigResponseDto findByCode(@ApiParam(value = "${v1.salesmanConfig.code}", required = true) @PathVariable("code") String code) {
-        return salesmanConfigService.find(code);
+    public ComissionResponseDto findByCode(@ApiParam(value = "${v1.salesmanConfig.code}", required = true) @PathVariable("code") String code) {
+        return comissionService.find(code);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "${v1.salesmanconfig.update}")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Successful request with body content", response = SalesmanConfigResponseDto.class),
+            @ApiResponse(code = 200, message = "Successful request with body content", response = ComissionResponseDto.class),
     })
-    public SalesmanConfigResponseDto update(
-            @ApiParam(value = "${v1.salesmanConfig}", required = true) @RequestBody SalesmanConfigUpdateDto salesmanConfigUpdateDto) {
-        return salesmanConfigService.update(salesmanConfigUpdateDto);
+    public ComissionResponseDto update(
+            @ApiParam(value = "${v1.salesmanConfig}", required = true) @RequestBody CommissionUpdateDto commissionUpdateDto) {
+        return comissionService.update(commissionUpdateDto);
     }
 }

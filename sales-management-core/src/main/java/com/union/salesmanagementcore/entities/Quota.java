@@ -31,21 +31,19 @@ public class Quota {
     @Column(name = "CREATED_AT", nullable = false)
     private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "QUOTA_TYPE", nullable = false)
-    private QuotaType quotaType;
-
     @Column(name = "VALUE", nullable = false)
     private Double value;
 
-    @Column(name = "INITIAL_QUARTER_REFERENCE", nullable = false)
-    private LocalDate initialQuarterReference;
-
-    @Column(name = "END_QUARTER_REFERENCE", nullable = false)
-    private LocalDate endQuarterReference;
-
     @OneToMany(mappedBy = "quota", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private List<Goal> goals;
+    private List<Sales> sales;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "SALESMAN_ID", referencedColumnName = "ID")
+    private Salesman salesman;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "QUARTER_ID", referencedColumnName = "ID")
+    private Quarter quarter;
 
     public String getId() {
         return id;
@@ -65,15 +63,6 @@ public class Quota {
         return this;
     }
 
-    public QuotaType getQuotaType() {
-        return quotaType;
-    }
-
-    public Quota setQuotaType(QuotaType quotaType) {
-        this.quotaType = quotaType;
-        return this;
-    }
-
     public Double getValue() {
         return value;
     }
@@ -83,30 +72,30 @@ public class Quota {
         return this;
     }
 
-    public LocalDate getInitialQuarterReference() {
-        return initialQuarterReference;
+    public List<Sales> getSales() {
+        return sales;
     }
 
-    public Quota setInitialQuarterReference(LocalDate initialQuarterReference) {
-        this.initialQuarterReference = initialQuarterReference;
+    public Quota setSales(List<Sales> sales) {
+        this.sales = sales;
         return this;
     }
 
-    public LocalDate getEndQuarterReference() {
-        return endQuarterReference;
+    public Salesman getSalesman() {
+        return salesman;
     }
 
-    public Quota setEndQuarterReference(LocalDate endQuarterReference) {
-        this.endQuarterReference = endQuarterReference;
+    public Quota setSalesman(Salesman salesman) {
+        this.salesman = salesman;
         return this;
     }
 
-    public List<Goal> getGoals() {
-        return goals;
+    public Quarter getQuarter() {
+        return quarter;
     }
 
-    public Quota setGoals(List<Goal> goals) {
-        this.goals = goals;
+    public Quota setQuarter(Quarter quarter) {
+        this.quarter = quarter;
         return this;
     }
 }

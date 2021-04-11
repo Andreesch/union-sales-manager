@@ -3,8 +3,8 @@ package com.union.salesmanagementcore.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.union.salesmanagementcore.entities.SalesmanConfig;
+import com.union.salesmanagementcore.entities.Commission;
 
 @Repository
-public interface SalesmanConfigRepository extends JpaRepository<SalesmanConfig, String> {
+public interface CommissionRepository extends JpaRepository<Commission, String> {
 }

@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("SalesmanConfigResponse")
-public class SalesmanConfigResponseDto {
+public class ComissionResponseDto {
 
     @ApiModelProperty(value = "${salesmanConfig.response.id}")
     private String id;
@@ -21,7 +21,7 @@ public class SalesmanConfigResponseDto {
         return id;
     }
 
-    public SalesmanConfigResponseDto setId(String id) {
+    public ComissionResponseDto setId(String id) {
         this.id = id;
         return this;
     }
@@ -30,7 +30,7 @@ public class SalesmanConfigResponseDto {
         return commissionType;
     }
 
-    public SalesmanConfigResponseDto setCommissionType(CommissionType commissionType) {
+    public ComissionResponseDto setCommissionType(CommissionType commissionType) {
         this.commissionType = commissionType;
         return this;
     }
@@ -39,7 +39,7 @@ public class SalesmanConfigResponseDto {
         return value;
     }
 
-    public SalesmanConfigResponseDto setValue(Double value) {
+    public ComissionResponseDto setValue(Double value) {
         this.value = value;
         return this;
     }

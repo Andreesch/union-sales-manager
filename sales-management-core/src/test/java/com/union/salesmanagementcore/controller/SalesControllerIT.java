@@ -3,7 +3,7 @@ package com.union.salesmanagementcore.controller;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class SalesControllerIT extends AbstractTestController {
     public void create() throws Exception {
         SalesmanResponseDto salesmanResponseDto = SalesmanHelper.createDefault();
 
-        SalesCreateDto createDto = createDto(salesmanResponseDto.getId(), 20.00d, LocalDateTime.now(), "Apple Iphone 11 256gb");
+        SalesCreateDto createDto = createDto(salesmanResponseDto.getId(), 20.00d, LocalDate.now(), "Apple Iphone 11 256gb");
 
         SalesResponseDto responseDto = given()
                 .header("Content-Type", "application/json")
@@ -43,7 +43,7 @@ public class SalesControllerIT extends AbstractTestController {
 
     }
 
-    private SalesCreateDto createDto(String salesmanId, Double value, LocalDateTime createdAt, String description) {
+    private SalesCreateDto createDto(String salesmanId, Double value, LocalDate createdAt, String description) {
         return new SalesCreateDto()
                 .setSalesmanId(salesmanId)
                 .setValue(value)

@@ -1,6 +1,6 @@
 package com.union.salesmanagementcore.api.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,7 +21,7 @@ public class SalesCreateDto {
 
     @NotBlank
     @ApiModelProperty(value = "${sales.create.createdAt}")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @NotBlank
     @ApiModelProperty(value = "${sales.create.salesmanId}")
@@ -45,11 +45,11 @@ public class SalesCreateDto {
         return this;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public SalesCreateDto setCreatedAt(LocalDateTime createdAt) {
+    public SalesCreateDto setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
         return this;
     }

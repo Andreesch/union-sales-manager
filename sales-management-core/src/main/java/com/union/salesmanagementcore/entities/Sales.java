@@ -37,6 +37,10 @@ public class Sales {
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
     private Salesman salesman;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "QUOTA_ID", referencedColumnName = "ID")
+    private Quota quota;
+
     public String getId() {
         return id;
     }
@@ -79,6 +83,15 @@ public class Sales {
 
     public Sales setSalesman(Salesman salesman) {
         this.salesman = salesman;
+        return this;
+    }
+
+    public Quota getQuota() {
+        return quota;
+    }
+
+    public Sales setQuota(Quota quota) {
+        this.quota = quota;
         return this;
     }
 }
